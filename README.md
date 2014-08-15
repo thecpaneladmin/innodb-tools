@@ -140,7 +140,7 @@ This is the location we are restoring from.
 
 Import syntax:
 
-    ./innodb_import_export.py --import --dir=DIR [--skip-working] [--config=CONFIG]
+    ./innodb_export_import.py --import --dir=DIR [--skip-working] [--config=CONFIG]
 
 Where:
 
@@ -204,7 +204,7 @@ This script can automate post-import sanity checks against InnoDB tables
 
 Check syntax:
 
-    ./innodb_import_export.py --verify
+    ./innodb_export_import.py --verify
 
 A summary and location of the log file will be given when the script run is
 completed.  The log file will log failures at an ERROR level for review.
