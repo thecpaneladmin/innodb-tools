@@ -425,6 +425,8 @@ def do_import(options, config):
     for dbname in databases:
         # Make sure this is a valid database
         if database_exists(config, dbname):
+            if dbname == 'mysql':
+                continue
 
             # Get tables
             table_files = glob(os.path.join(data_dir, dbname, '*.sql'))
