@@ -215,7 +215,7 @@ tables.
 
  When you start MySQL, go into this script's source folder and re-import them:
 
-    `mysql mysql < mysql_innodb_stat_tables.sql`
+    mysql mysql < mysql_innodb_stat_tables.sql
 
    
 ### Checking tables
