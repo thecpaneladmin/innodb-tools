@@ -196,7 +196,27 @@ http://dev.mysql.com/doc/refman/5.6/en/option-files.html
 
   This is not coded into the script as doing this may be irreversible and
   dangerous.  Again, make sure you have a backup.
-   
+
+
+### Recreating InnoDB Stat Tables
+
+When you nuke the InnoDB tablespace information and are running MySQL 5.6 or
+ higher, you will need to recreate the InnoDB stat tables.  These tables are:
+
+  * innodb_index_stats
+  * innodb_table_stats
+  * slave_master_info
+  * slave_relay_log_info
+  * slave_worker_info
+
+WHILE MYSQL IS STOPPED, and you have deleted ibdata1 and ib_logfile*, go into
+the 'mysql' database folder and remove the .frm and .ibd files for these
+tables.
+
+ When you start MySQL, go into this script's source folder and re-import them:
+
+    `mysql mysql < mysql_innodb_stat_tables.sql`
+
    
 ### Checking tables
 

@@ -205,12 +205,9 @@ def get_dbs_with_innodb(config):
         print 'MySQL Error %d: %s' % (err.args[0], err.args[1])
         return False
 
-    # CHECK THIS - make sure it does not dump mysql
-    databases = [
-        d[0] for d in dbconn.fetchall() if d not in (
-            'mysql', 'information_schema'
-            )
-    ]
+    databases = [ d[0] for d in dbconn.fetchall() ]
+    for exclude_db in [ 'mysql', 'information_schema' ]:
+        databases.remove(exclude_db)
 
     print 'Checking for InnoDB tables...'
 
@@ -356,6 +353,11 @@ def do_export(options, config, timestamp, mysql_version):
     else:
         print 'No databases detected, or none contain InnoDB data.'
 
+    # Keep a ghetto counter with the number of tables, so we can check progress
+    num_tables = 0
+    for dbname, tables in databases.items():
+        num_tables += len(tables)
+
     for dbname, tables in databases.items():
         for table in tables:
             stats['tables_total'] += 1
@@ -364,7 +366,7 @@ def do_export(options, config, timestamp, mysql_version):
                 sys.exit(0)
 
             if dump_table(dbname, table, mysql_version, data_dir, config):
-                msg = 'Dumped table %s.%s' % (dbname, table)
+                msg = 'Dumped table %s.%s (%s / %s)' % (dbname, table, stats['tables_total'], num_tables)
                 print color_me(msg, 'green')
                 logging.info(msg)
                 stats['tables_exported'] += 1
