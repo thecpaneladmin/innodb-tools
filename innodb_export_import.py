@@ -239,7 +239,7 @@ def dump_table(dbname, table, mysql_version, data_dir, config):
     """Dumps a table"""
 
     dump_opts = ''
-    if mysql_version >= 56:
+    if mysql_version >= 56 and mysql_version < 10: # 10 = MariaDB
         dump_opts = '--add-drop-trigger' # Only supported in mysqldump for 5.6
 
     dump_path = os.path.join(data_dir, dbname)

@@ -78,7 +78,7 @@ http://webcheatsheet.com/sql/mysql_backup_restore.php
 
 The following is also needed:
 
-* MySQL 5.0 or higher with client packages installed
+* MySQL 5.0 or higher, or MariaDB 10.0 or higher, with client packages installed
 * Python 2.6 or 2.7 with standard modules includes, plus MySQLDB
 * Enough free disk space on the partition this script will dump to
   (typically the size of your MySQL data folder)
